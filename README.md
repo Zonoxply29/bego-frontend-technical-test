@@ -1,79 +1,98 @@
 # Cargo Orders App
 
-Aplicación frontend para visualizar órdenes de carga, consultar próximos pedidos, filtrar por número de orden y revisar el detalle de cada orden.
+## Delivery Links
 
-El proyecto fue construido con una estructura modular para separar responsabilidades entre API, servicios, hooks, adaptadores, tipos y componentes visuales.
-
----
-
-## Tecnologías utilizadas
-
-- React
-- TypeScript
-- Vite
-- React Router DOM
-- SCSS Modules
-- Fetch API
+* **GitHub Repository:** https://github.com/Zonoxply29/bego-frontend-technical-test
+* **Live Demo:** https://bego-frontend-technical-test-gfzgmcevs-hugo-ggv-s-projects.vercel.app/
 
 ---
 
-## Funcionalidades principales
+## Overview
 
-### Vista de órdenes
+Cargo Orders App is a frontend technical test developed for BEGO.
+The application allows users to view upcoming cargo orders, search orders by number, check the status of each order, and open a detailed view with pickup, dropoff, tracking progress, and destination information.
 
-- Consulta de pedidos próximos desde la API.
-- Renderizado de cards de órdenes.
-- Filtro por número de orden desde el componente `SearchBar`.
-- Mapeo de estados visuales como `Assigned` e `In transit`.
-- Mapeo de color del punto de estado según la información recibida por la API.
-- Botón de pickup con contador:
-  - Muestra cuánto falta para iniciar pickup.
-  - Cuando el tiempo termina, muestra `Its time for pickup`.
-  - Al hacer click imprime en consola: `Navegar`.
-- Botón `Resume` para navegar a la vista de detalle de la orden.
-
-### Vista de detalle
-
-- Navegación desde `Resume`.
-- Header con botón de regreso a la vista principal.
-- Card superior con información general de la orden.
-- Switch entre `Pickup` y `Dropoff`.
-- Datos provenientes de `destinations`.
-- Timeline de progreso basado en el `status` de la orden.
-- Botón `Track Order`:
-  - Se habilita únicamente cuando `status >= 3`.
-  - Al hacer click imprime en consola: `Track Order`.
-- Panel expandible para mostrar u ocultar información del pickup/dropoff seleccionado.
-- Mapeo de teléfono y correo desde `contact_info`.
+The project was built with a modular structure to keep the code clean, reusable, and easy to maintain.
 
 ---
 
-## Endpoints utilizados
+## Technologies Used
 
-La URL base se configura mediante variable de entorno:
+* React
+* TypeScript
+* Vite
+* React Router DOM
+* SCSS Modules
+* Fetch API
+
+---
+
+## Main Features
+
+### Cargo Orders View
+
+* Fetches upcoming cargo orders from the API.
+* Displays each order as a reusable card component.
+* Allows searching orders by order number.
+* Shows order status with visual indicators.
+* Displays pickup and dropoff information.
+* Includes a pickup countdown button:
+
+  * Shows the remaining time before pickup starts.
+  * Enables the button when the pickup time is reached.
+  * Logs `Navegar` in the console when clicked.
+* Includes a `Resume` button to navigate to the order details page.
+
+### Cargo Details View
+
+* Displays detailed information for a selected order.
+* Allows switching between pickup and dropoff data.
+* Shows the order reference number and order number.
+* Displays destination address, date, time, phone, and email.
+* Includes a tracking progress timeline based on the order status.
+* Enables the `Track Order` button only when the order status allows it.
+* Includes an expandable data panel.
+* Provides a back button to return to the main orders view.
+
+---
+
+## API Configuration
+
+The project uses a base URL configured through an environment variable.
+
+Create a `.env` file in the root folder:
 
 ```env
 VITE_API_BASE_URL=https://129bc152-6319-4e38-b755-534a4ee46195.mock.pstmn.io
 ```
 
-Endpoints:
+An `.env.example` file should also be included in the repository:
+
+```env
+VITE_API_BASE_URL=https://129bc152-6319-4e38-b755-534a4ee46195.mock.pstmn.io
+```
+
+---
+
+## API Endpoints
 
 ```txt
 GET /orders/upcoming
 GET /orders
 ```
 
-### Nota importante sobre los datos
+### Important API Note
 
-El endpoint `/orders/upcoming` devuelve la lista de órdenes próximas.
+The `/orders/upcoming` endpoint returns the list of upcoming orders.
 
-El endpoint `/orders` devuelve información detallada de una orden. Por eso la aplicación conserva la lista de `/orders/upcoming` como fuente principal y enriquece las órdenes con información de `/orders` cuando existe coincidencia por `_id` u `order_number`.
+The `/orders` endpoint returns detailed information for an order.
+For this reason, the application keeps `/orders/upcoming` as the main source for the order list and enriches the matching order with detailed information from `/orders` when possible.
 
-Esto permite conservar todas las cards de próximos pedidos sin perder información detallada cuando está disponible.
+This approach keeps all upcoming orders visible while still using additional details when they are available.
 
 ---
 
-## Estructura del proyecto
+## Project Structure
 
 ```txt
 src/
@@ -130,33 +149,33 @@ src/
 
 ---
 
-## Instalación
+## Installation
 
-Clonar el repositorio:
-
-```bash
-git clone <repository-url>
-```
-
-Entrar al proyecto:
+Clone the repository:
 
 ```bash
-cd <project-folder>
+git clone https://github.com/Zonoxply29/bego-frontend-technical-test.git
 ```
 
-Instalar dependencias:
+Enter the project folder:
+
+```bash
+cd bego-frontend-technical-test
+```
+
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-Crear archivo `.env` en la raíz del proyecto:
+Create the `.env` file:
 
 ```env
 VITE_API_BASE_URL=https://129bc152-6319-4e38-b755-534a4ee46195.mock.pstmn.io
 ```
 
-Ejecutar en modo desarrollo:
+Run the project locally:
 
 ```bash
 npm run dev
@@ -164,35 +183,31 @@ npm run dev
 
 ---
 
-## Scripts disponibles
+## Available Scripts
 
 ```bash
 npm run dev
 ```
 
-Levanta el servidor de desarrollo.
+Runs the application in development mode.
 
 ```bash
 npm run build
 ```
 
-Genera la versión de producción.
+Builds the application for production.
 
 ```bash
 npm run preview
 ```
 
-Permite revisar localmente el build de producción.
+Runs a local preview of the production build.
 
 ---
 
-## Arquitectura y buenas prácticas aplicadas
+## Architecture
 
-### Separación de responsabilidades
-
-La aplicación evita hacer llamadas HTTP directamente desde los componentes visuales.
-
-Flujo general:
+The project follows a clean separation of responsibilities.
 
 ```txt
 Page
@@ -202,7 +217,7 @@ Page
 → API
 ```
 
-Ejemplo:
+Example:
 
 ```txt
 CargoOrdersPage
@@ -212,27 +227,31 @@ CargoOrdersPage
 → apiClient
 ```
 
+This keeps API logic outside of the UI components and makes the project easier to test, maintain, and extend.
+
 ---
 
-### Adaptadores de datos
+## Data Adapters
 
-La API no se consume directamente en la UI. Primero se adapta a modelos visuales.
+The application does not use raw API data directly inside the UI.
+
+API responses are transformed by adapters before being passed to components.
 
 ```txt
-Respuesta API
+API Response
 → Adapter
-→ Tipo visual
-→ Componente
+→ UI Type
+→ Component
 ```
 
-Adaptadores principales:
+Main adapters:
 
 ```txt
 order-card.adapter.ts
 order-details.adapter.ts
 ```
 
-Esto evita que los componentes dependan de nombres internos de la API como:
+This prevents components from depending directly on API field names such as:
 
 ```txt
 order_number
@@ -241,7 +260,7 @@ reference_number
 contact_info
 ```
 
-Los componentes reciben datos ya preparados como:
+Instead, components receive clean and prepared data such as:
 
 ```txt
 orderNumber
@@ -254,37 +273,37 @@ timeline
 
 ---
 
-### Hooks principales
+## Main Hooks
 
-#### `useOrders`
+### `useOrders`
 
-Obtiene órdenes desde la API.
+Fetches orders from the API.
 
-#### `useEnrichedUpcomingOrders`
+### `useEnrichedUpcomingOrders`
 
-Obtiene órdenes próximas y las enriquece con datos detallados cuando hay coincidencia.
+Fetches upcoming orders and enriches them with detailed data when there is a match.
 
-#### `useOrderDetails`
+### `useOrderDetails`
 
-Obtiene y adapta la información necesaria para la vista de detalle.
+Finds and adapts the selected order for the details page.
 
-#### `useNavigationCountdown`
+### `useNavigationCountdown`
 
-Compara la fecha de inicio contra la hora actual para habilitar el botón de pickup.
+Compares the pickup start date with the current time and controls the pickup button state.
 
-#### `useOrderSearch`
+### `useOrderSearch`
 
-Filtra órdenes por número de orden.
+Filters orders by order number.
 
 ---
 
-## Reglas funcionales implementadas
+## Functional Rules
 
-### Filtro por orden
+### Order Search
 
-El buscador normaliza el texto para permitir búsquedas con o sin `#`, espacios o diferencia entre mayúsculas y minúsculas.
+The search input normalizes the text to allow searches with or without `#`, spaces, or uppercase/lowercase differences.
 
-Ejemplos válidos:
+Valid examples:
 
 ```txt
 7804
@@ -295,26 +314,26 @@ ID7PJQBJ
 
 ---
 
-### Botón de pickup
+### Pickup Button
 
-El botón compara `startDate` contra la hora actual.
+The pickup button compares `startDate` with the current time.
 
 ```txt
-Si startDate > Date.now()
-→ muestra contador
-→ botón deshabilitado
+If startDate > Date.now()
+→ show countdown
+→ button disabled
 
-Si startDate <= Date.now()
-→ muestra "Its time for pickup"
-→ botón habilitado
-→ click imprime "Navegar"
+If startDate <= Date.now()
+→ show "Its time for pickup"
+→ button enabled
+→ click logs "Navegar"
 ```
 
 ---
 
-### Timeline de detalle
+### Tracking Timeline
 
-El timeline se basa en el valor numérico de `status`.
+The tracking timeline is based on the numeric `status` value.
 
 ```txt
 status >= 1 → Created Order
@@ -325,24 +344,24 @@ status >= 4 → Pickup Completed
 
 ---
 
-### Track Order
+### Track Order Button
 
 ```txt
 status < 3
-→ botón deshabilitado
+→ button disabled
 
 status >= 3
-→ botón habilitado
-→ click imprime "Track Order"
+→ button enabled
+→ click logs "Track Order"
 ```
 
 ---
 
-### Pickup / Dropoff data
+### Pickup and Dropoff Data
 
-La card superior permite seleccionar entre pickup y dropoff.
+The user can select between pickup and dropoff in the summary card.
 
-El panel inferior muestra la información correspondiente al destino seleccionado:
+The lower panel displays the selected destination information:
 
 ```txt
 address
@@ -352,7 +371,7 @@ telephone
 email
 ```
 
-La información de contacto se toma desde:
+Contact information is read from:
 
 ```txt
 destinations[index].contact_info.telephone
@@ -361,11 +380,11 @@ destinations[index].contact_info.email
 
 ---
 
-## Consideraciones de API
+## API Fallbacks
 
-Algunos datos no están disponibles en todos los endpoints.
+Some fields are not available in all API responses.
 
-Por ejemplo, `/orders/upcoming` puede no traer:
+For example, `/orders/upcoming` may not include:
 
 ```txt
 route.pickup
@@ -374,48 +393,70 @@ reference_number
 contact_info
 ```
 
-Cuando esos datos no existen, la aplicación utiliza fallbacks seguros como:
+When data is missing, the application uses safe fallback values such as:
 
 ```txt
-Sin referencia
-Sin teléfono
-Sin correo
-Recolección
-Entrega
+No reference
+No phone
+No email
+Pickup
+Dropoff
 ```
 
-Esto evita errores de renderizado y mantiene la UI estable.
+This prevents rendering errors and keeps the UI stable.
 
 ---
 
-## Verificación manual
+## Manual Testing Checklist
 
-### Probar buscador
+### Orders View
 
-1. Ejecutar la app.
-2. Escribir parte del número de orden.
-3. Confirmar que solo se muestren las cards coincidentes.
-4. Escribir un valor inexistente y validar el mensaje vacío.
+1. Open the live demo.
+2. Confirm that the cargo order cards are displayed.
+3. Search by order number.
+4. Confirm that the list filters correctly.
+5. Click the `Resume` button.
+6. Confirm that the app navigates to the order details page.
 
-### Probar pickup button
+### Pickup Button
 
-1. Revisar una orden con `startDate` futuro.
-2. Confirmar que se muestra contador.
-3. Revisar una orden con `startDate` vencido.
-4. Confirmar que aparece `Its time for pickup`.
-5. Hacer click y validar en consola `Navegar`.
+1. Check an order with a future pickup date.
+2. Confirm that the countdown is displayed.
+3. Check an order with an available pickup time.
+4. Confirm that the button shows `Its time for pickup`.
+5. Click the button and confirm that `Navegar` appears in the console.
 
-### Probar detalle
+### Details View
 
-1. Dar click en `Resume`.
-2. Confirmar navegación a `/orders/:orderNumber`.
-3. Cambiar entre pickup y dropoff.
-4. Confirmar que cambia la información del panel inferior.
-5. Abrir y cerrar el panel.
-6. Validar que `Track Order` solo esté activo si `status >= 3`.
+1. Open an order detail page.
+2. Switch between pickup and dropoff.
+3. Confirm that the lower data panel updates.
+4. Open and close the data panel.
+5. Check that the timeline updates based on the order status.
+6. Confirm that the `Track Order` button is enabled only when `status >= 3`.
+7. Refresh a route like `/orders/:orderNumber` and confirm that it does not return a 404.
 
 ---
 
-## Estado del proyecto
+## Deployment
 
-La prueba integra consumo de API, renderizado dinámico, navegación, adaptación de datos, manejo de estados, contador en tiempo real y componentes reutilizables con estilos modulares.
+The project was deployed using Vercel.
+
+A `vercel.json` file is included to support React Router routes in production:
+
+```json
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
+```
+
+---
+
+## Project Status
+
+The project includes API integration, dynamic rendering, routing, data adaptation, state handling, real-time countdown logic, responsive components, and modular SCSS styling.
