@@ -1,0 +1,38 @@
+@use "../../styles/abstracts/variables" as *;
+
+.page {
+  min-height: 100vh;
+  width: 100%;
+
+  background: #05080a;
+  color: $color-text;
+
+  overflow-x: hidden;
+}
+
+.content {
+  width: 100%;
+  max-width: 390px;
+  box-sizing: border-box;
+
+  margin: 0 auto;
+  padding: 0 22px 44px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.message {
+  margin-top: 24px;
+  color: $color-muted;
+  font-size: 14px;
+  text-align: center;
+}
+
+@media (max-width: 374px) {
+  .content {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}

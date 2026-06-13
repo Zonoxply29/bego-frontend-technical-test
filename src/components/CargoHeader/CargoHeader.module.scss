@@ -1,0 +1,44 @@
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.header {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 80px 40px 28px;
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+  background-color: $color-background;
+}
+
+.iconButton {
+  width: 40px;
+  height: 40px;
+  @include flex-center;
+  border-radius: $radius-pill;
+  color: $color-text;
+
+  img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+.title {
+  color: $color-text;
+  font-size: $font-size-xl;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+}

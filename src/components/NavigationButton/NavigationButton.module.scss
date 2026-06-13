@@ -1,0 +1,100 @@
+.button {
+  position: relative;
+  z-index: 5;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  min-height: 38px;
+  padding: 0 18px;
+
+  border-radius: 999px;
+  border: none;
+  appearance: none;
+
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    filter 0.2s ease;
+
+  &:disabled {
+    opacity: 1;
+  }
+}
+
+.buttonWaiting {
+  min-width: 175px;
+  min-height: 40px;
+  margin-left: -2px;
+  padding: 0 16px 0 20px;
+
+  border: 0.3px solid transparent;
+
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0px;
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+
+  background-image:
+    linear-gradient(180deg, #101417 0%, #080c0f 100%),
+    radial-gradient(ellipse 120% 85% at 50% 50%,
+      rgba(132, 132, 132, 0) 0%,
+      rgba(186, 186, 186, 0.49) 48.96%,
+      #000000 78%);
+
+  background-origin:
+    padding-box,
+    border-box;
+
+  background-clip:
+    padding-box,
+    border-box;
+
+  background-position:
+    center,
+    center;
+
+  background-size:
+    auto,
+    auto;
+
+  background-repeat:
+    no-repeat,
+    no-repeat;
+
+  color: #ffffff;
+  cursor: not-allowed;
+
+  strong {
+    color: #f6ff00;
+    font-size: 12px;
+    font-weight: 900;
+  }
+}
+
+.buttonActive {
+  min-width: 194px;
+  min-height: 45px;
+  margin-left: -1px;
+  padding: 0 18px 0 42px;
+  
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+
+  background: #ffee00;
+  color: #101417;
+  cursor: pointer;
+  box-shadow: inset -6px -4px 2px 0 #c2b500;
+
+  &:hover {
+    filter: brightness(0.94);
+  }
+}

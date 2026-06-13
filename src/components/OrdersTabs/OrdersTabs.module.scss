@@ -1,0 +1,38 @@
+@use "../../styles/abstracts/variables" as *;
+
+.tabs {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.6fr;
+  align-items: center;
+  column-gap: 36px;
+}
+
+.tab {
+  position: relative;
+  width: fit-content;
+  padding: 0 0 12px;
+  color: $color-text;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  letter-spacing: -0.3px;
+}
+
+.active {
+  color: $color-primary;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 27px;
+    height: 2px;
+    border-radius: $radius-pill;
+    background-color: $color-primary;
+  }
+}

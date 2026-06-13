@@ -1,0 +1,207 @@
+@use "../../styles/abstracts/variables" as *;
+
+.card {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+
+    margin-top: 52px;
+    padding: 68px 0 0;
+    overflow: visible;
+
+    border: 2px solid transparent;
+    border-radius: 22px;
+
+    background-image:
+        linear-gradient(180deg, #101417 0%, #080c0f 100%),
+        radial-gradient(ellipse 120% 85% at 50% 50%,
+            rgba(132, 132, 132, 0) 0%,
+            rgba(186, 186, 186, 0.49) 48.96%,
+            #000000 78%);
+
+    background-origin:
+        padding-box,
+        border-box;
+
+    background-clip:
+        padding-box,
+        border-box;
+}
+
+.avatarWrapper {
+    position: absolute;
+    top: -48px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 88px;
+    height: 88px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.avatar,
+.avatarFallback {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+}
+
+.avatar {
+    display: block;
+    object-fit: cover;
+}
+
+.avatarFallback {
+    display: grid;
+    place-items: center;
+
+    background: #1a2228;
+    color: #ffee00;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.mainTime {
+    display: block;
+    margin-bottom: 34px;
+
+    color: $color-text;
+    font-size: 22px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.timeline {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 42px 42px;
+}
+
+.timelineStep {
+  position: relative;
+  min-height: 62px;
+
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  column-gap: 18px;
+  align-items: flex-start;
+
+  color: rgba(255, 255, 255, 0.28);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.timelineStepCompleted {
+  color: $color-text;
+}
+
+.stepMarker {
+  position: relative;
+  z-index: 2;
+
+  width: 36px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+  background: #34383d;
+
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.28);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border-radius: 50%;
+    background: #7c7c7c;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 13px;
+    border-radius: 50%;
+    background: #d9d9d9;
+  }
+}
+
+.timelineStepCompleted .stepMarker {
+  background: #ffee00;
+  box-shadow: none;
+
+  &::before,
+  &::after {
+    display: none;
+  }
+}
+
+.checkIcon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  object-fit: contain;
+  position: relative;
+  z-index: 3;
+}
+
+.stepLine {
+  position: absolute;
+  top: 36px;
+  left: 17px;
+
+  width: 2px;
+  height: 30px;
+
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.stepLineCompleted {
+  background: #ffee00;
+}
+
+.stepLabel {
+    padding-top: 5px;
+    line-height: 1.2;
+}
+
+.trackButton {
+    width: 100%;
+    height: 74px;
+
+    border: none;
+    border-radius: 0 0 20px 20px;
+
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.18);
+
+    font-size: 20px;
+    font-weight: 900;
+
+    cursor: not-allowed;
+
+    &:disabled {
+        opacity: 1;
+    }
+}
+
+.trackButtonActive {
+    background: #ffee00;
+    color: #101417;
+    cursor: pointer;
+    box-shadow: inset -8px -4px 6px 0 #c2b500;
+
+    &:hover {
+        filter: brightness(0.94);
+    }
+
+    &:active {
+        transform: scale(0.99);
+    }
+}
