@@ -53,7 +53,6 @@ function RoutePoint({ type, location }: RoutePointProps) {
 }
 
 export function OrderCard({ order, onResume }: OrderCardProps) {
-  const isInTransit = order.statusVariant === "transit";
   const isFcl = order.type === "FCL";
   const loadIcon = isFcl ? fclContainerIcon : ftlTruckIcon;
   const showPickupAction = Boolean(order.startDate);
